@@ -1,55 +1,79 @@
 // Assignment code here
-
-//LEGIT USE
 function handleGeneratePasswordOnClick() {
   var passwordLength = initiatePasswordLengthPrompt();
-  console.log("in handle!");
-  console.log(passwordLength);
   if (passwordLength) {
-    /*
+    /* GENERATE PASSWORD F()
     The index of the following arrays corresponds to the options for character types provided to the visitor.
     0 = lowercase
     1 = uppercase
     2 = numeric
     3 = special
 
-    charTypeDistribution - used to control the distribution of character types in the password.
-    charTypeSelections - boolean array indicating which character types were selected.
+    charTypeOptions - Strings representing the total characters for each option.
+    charTypeSelections - Boolean array indicating which character types were selected.
   */
     var charTypeSelections = [];
     charTypeSelections.push(initiateLowercaseCharacterConfirm());
     charTypeSelections.push(initiateUppercaseCharacterConfirm());
     charTypeSelections.push(initiateNumericCharacterConfirm());
     charTypeSelections.push(initiateSpecialCharacterConfirm());
-    console.log(charTypeSelections);
-    if (!charTypeSelections.every()) {
+    var totalSelections = charTypeSelections.filter(Boolean);
+    console.log("total selections! " + totalSelections);
+    if (totalSelections.length == 0) {
       alert(
         "You did not select any options....this application does not support the characters you want."
       );
       return;
     }
     /*
-      SPECIAL SAVE FOR PRETTIER
+      SPECIAL SAVE FOR PRETTIER CTRL + '
     */
     const charTypeOptions = [
       "abcdefghijklmnopqrstuvwxyz",
       "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       "0123456789",
-      "!@#$%^&*"
+      "!@#$%^&*", //                                            PRETTTTIIIERRRR
     ];
-    // given a value x and n segments, build [] s.t. [][0-n]+ = x
+    var passwordResult = "";
+    var tempPassword = "";
+    var numCharsToSelect = Math.ceil(passwordLength / totalSelections.length);
     for (i = 0; i < charTypeSelections.length; i++) {
       if (charTypeSelections[i]) {
+        console.log("skerp " + passwordLength);
+        console.log("skerp " + totalSelections.length);
+        console.log("char options " + charTypeOptions[i]);
+        tempPassword += randomlySelectChars(
+          numCharsToSelect,
+          charTypeOptions[i]
+        );
       }
     }
+    var passwordCharArray = tempPassword.split("");
+    passwordCharArray.sort(function () {
+      return Math.random() - 0.5;
+    });
+    tempPassword = passwordCharArray.join("");
+    var passwordCharDifference = tempPassword.length - passwordLength;
+    if (passwordCharDifference > 0) {
+      passwordResult = tempPassword.slice(passwordCharDifference);
+    } else if (passwordCharDifference == 0) {
+      passwordResult = tempPassword;
+    } else {
+      alert(
+        "Congrats, you found a bug because the developer doesn't know how to math!  NO PASSWORD FOR YOU!"
+      );
+      return;
+    }
+    console.log(passwordResult);
+    return passwordResult;
+    //GENERATE PASSWORD F() END
   }
-  //password cleanup to add characters
 }
 function randomlySelectChars(numCharsToSelect, charDomain) {
-  var resultChars;
-  for (i = 0; i < numCharsToSelect; i++) {
-    resultChars = charDomain.charAt(
-      Math.floor(Math.random() * numCharsToSelect)
+  var resultChars = "";
+  for (j = 0; j < numCharsToSelect; j++) {
+    resultChars += charDomain.charAt(
+      Math.floor(Math.random() * charDomain.length)
     );
   }
   return resultChars;
@@ -138,4 +162,4 @@ function writePassword() {
   */
 }
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword());
+//generateBtn.addEventListener("click", writePassword());
