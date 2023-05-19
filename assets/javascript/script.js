@@ -14,10 +14,18 @@ function generatePassword() {
     charTypeSelections - Boolean array indicating which character types were selected from the confirm dialog boxes.
   */
     var charTypeSelections = [];
-    charTypeSelections.push(confirm("Does your password need lowercase characters?"));
-    charTypeSelections.push(confirm("Does your password need uppercase characters?"));
-    charTypeSelections.push(confirm("Does your password need numeric characters?"));
-    charTypeSelections.push(confirm("Does your password need special characters?"));
+    charTypeSelections.push(
+      confirm("Does your password need lowercase characters?")
+    );
+    charTypeSelections.push(
+      confirm("Does your password need uppercase characters?")
+    );
+    charTypeSelections.push(
+      confirm("Does your password need numeric characters?")
+    );
+    charTypeSelections.push(
+      confirm("Does your password need special characters?")
+    );
     var totalSelections = charTypeSelections.filter(Boolean);
     if (totalSelections.length == 0) {
       alert(
@@ -29,7 +37,7 @@ function generatePassword() {
       "abcdefghijklmnopqrstuvwxyz",
       "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       "0123456789",
-      " !”#$%&’()*+,-./\\:;<=>?@[]^_`{|}~"
+      " !”#$%&’()*+,-./\\:;<=>?@[]^_`{|}~",
     ];
     var tempPassword = "";
     var numCharsToSelect = Math.ceil(passwordLength / totalSelections.length);
@@ -118,10 +126,4 @@ function writePassword() {
   }
 }
 // Add event listener to generate button
-generateBtn.addEventListener(
-  "click",
-  function () {
-    writePassword();
-  },
-  false
-);
+generateBtn.addEventListener("click", writePassword);
