@@ -3,22 +3,21 @@ function generatePassword() {
   var passwordResult = "";
   var passwordLength = initiatePasswordLengthPrompt();
   if (passwordLength) {
-    /* GENERATE PASSWORD
+    /*
     The index of the following arrays corresponds to the options for character types provided to the visitor.
-    This pattern needs to be replaced once the developer learns how to instantiate objects.
     0 = lowercase
     1 = uppercase
     2 = numeric
     3 = special
 
-    charTypeOptions - Strings representing the total characters for each option.
+    charTypeOptions - Strings representing the total possible characters for each type of character that the visitor can select.
     charTypeSelections - Boolean array indicating which character types were selected from the confirm dialog boxes.
   */
     var charTypeSelections = [];
-    charTypeSelections.push(initiateLowercaseCharacterConfirm());
-    charTypeSelections.push(initiateUppercaseCharacterConfirm());
-    charTypeSelections.push(initiateNumericCharacterConfirm());
-    charTypeSelections.push(initiateSpecialCharacterConfirm());
+    charTypeSelections.push(confirm("Does your password need lowercase characters?"));
+    charTypeSelections.push(confirm("Does your password need uppercase characters?"));
+    charTypeSelections.push(confirm("Does your password need numeric characters?"));
+    charTypeSelections.push(confirm("Does your password need special characters?"));
     var totalSelections = charTypeSelections.filter(Boolean);
     if (totalSelections.length == 0) {
       alert(
@@ -26,14 +25,11 @@ function generatePassword() {
       );
       return;
     }
-    /*
-      SPECIAL SAVE FOR PRETTIER CTRL + '
-    */
     const charTypeOptions = [
       "abcdefghijklmnopqrstuvwxyz",
       "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       "0123456789",
-      " !”#$%&’()*+,-./\\:;<=>?@[]^_`{|}~", //                                            PRETTTTIIIERRRR
+      " !”#$%&’()*+,-./\\:;<=>?@[]^_`{|}~"
     ];
     var tempPassword = "";
     var numCharsToSelect = Math.ceil(passwordLength / totalSelections.length);
@@ -45,11 +41,11 @@ function generatePassword() {
         );
       }
     }
-    var passwordCharArray = tempPassword.split("");
-    passwordCharArray.sort(function () {
+    var tempPasswordCharArray = tempPassword.split("");
+    tempPasswordCharArray.sort(function () {
       return Math.random() - 0.5;
     });
-    tempPassword = passwordCharArray.join("");
+    tempPassword = tempPasswordCharArray.join("");
     var passwordCharDifference = tempPassword.length - passwordLength;
     if (passwordCharDifference > 0) {
       passwordResult = tempPassword.slice(passwordCharDifference);
@@ -62,7 +58,6 @@ function generatePassword() {
       return;
     }
     return passwordResult;
-    //GENERATE PASSWORD F() END
   }
 }
 function initiatePasswordLengthPrompt() {
@@ -103,18 +98,6 @@ function humorousSoberUpAlert() {
     "Sober up, click 'Generate Password' again, and when prompted for the NUMBER of characters, THEN enter an integer (8, 9, 10...)"
   );
 }
-function initiateLowercaseCharacterConfirm() {
-  return confirm("Does your password need lowercase characters?");
-}
-function initiateUppercaseCharacterConfirm() {
-  return confirm("Does your password need uppercase characters?");
-}
-function initiateNumericCharacterConfirm() {
-  return confirm("Does your password need numeric characters?");
-}
-function initiateSpecialCharacterConfirm() {
-  return confirm("Does your password need special characters?");
-}
 function randomlySelectChars(numCharsToSelect, charDomain) {
   var resultChars = "";
   for (j = 0; j < numCharsToSelect; j++) {
@@ -126,11 +109,8 @@ function randomlySelectChars(numCharsToSelect, charDomain) {
 }
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
-
 // Write password to the #password input
 function writePassword() {
-  console.log("why you fire on load");
-  console.log(this);
   var password = generatePassword();
   if (password) {
     var passwordText = document.querySelector("#password");
