@@ -4,13 +4,18 @@
 
 Generates a unique password with constraints provided by the visitor through prompts.
 
+![Image of Password Generator With Readable Random String That Was Magically Generated When The Developer Was Testing](assets/images/password-generator-readme.png?raw=true)
+
 ## Installation
 
 N/A
 
 ## Usage
 
-Click "Generate Password" to initiate the prompts. Respond to each and a password will be generated that respects your choice for each.
+View the app!
+https://thepebble01.github.io/Module-03-Challenge-Password-Generator
+
+Click "Generate Password" to initiate the prompts. Respond to each and a password will be generated that respects your choice for each. Please only respond with the expected inputs for password character length!
 
 ## Credits
 

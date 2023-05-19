@@ -1,16 +1,18 @@
 // Assignment code here
-function handleGeneratePasswordOnClick() {
+function generatePassword() {
+  var passwordResult = "";
   var passwordLength = initiatePasswordLengthPrompt();
   if (passwordLength) {
-    /* GENERATE PASSWORD F()
+    /* GENERATE PASSWORD
     The index of the following arrays corresponds to the options for character types provided to the visitor.
+    This pattern needs to be replaced once the developer learns how to instantiate objects.
     0 = lowercase
     1 = uppercase
     2 = numeric
     3 = special
 
     charTypeOptions - Strings representing the total characters for each option.
-    charTypeSelections - Boolean array indicating which character types were selected.
+    charTypeSelections - Boolean array indicating which character types were selected from the confirm dialog boxes.
   */
     var charTypeSelections = [];
     charTypeSelections.push(initiateLowercaseCharacterConfirm());
@@ -18,10 +20,9 @@ function handleGeneratePasswordOnClick() {
     charTypeSelections.push(initiateNumericCharacterConfirm());
     charTypeSelections.push(initiateSpecialCharacterConfirm());
     var totalSelections = charTypeSelections.filter(Boolean);
-    console.log("total selections! " + totalSelections);
     if (totalSelections.length == 0) {
       alert(
-        "You did not select any options....this application does not support the characters you want."
+        "You did not select any options....this application does not support the types of characters that you want."
       );
       return;
     }
@@ -32,16 +33,12 @@ function handleGeneratePasswordOnClick() {
       "abcdefghijklmnopqrstuvwxyz",
       "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       "0123456789",
-      "!@#$%^&*", //                                            PRETTTTIIIERRRR
+      " !”#$%&’()*+,-./\\:;<=>?@[]^_`{|}~", //                                            PRETTTTIIIERRRR
     ];
-    var passwordResult = "";
     var tempPassword = "";
     var numCharsToSelect = Math.ceil(passwordLength / totalSelections.length);
     for (i = 0; i < charTypeSelections.length; i++) {
       if (charTypeSelections[i]) {
-        console.log("skerp " + passwordLength);
-        console.log("skerp " + totalSelections.length);
-        console.log("char options " + charTypeOptions[i]);
         tempPassword += randomlySelectChars(
           numCharsToSelect,
           charTypeOptions[i]
@@ -60,44 +57,14 @@ function handleGeneratePasswordOnClick() {
       passwordResult = tempPassword;
     } else {
       alert(
-        "Congrats, you found a bug because the developer doesn't know how to math!  NO PASSWORD FOR YOU!"
+        "Congrats, you found a bug because the developer doesn't know how to math or clean up characters!  NO PASSWORD FOR YOU!"
       );
       return;
     }
-    console.log(passwordResult);
     return passwordResult;
     //GENERATE PASSWORD F() END
   }
 }
-function randomlySelectChars(numCharsToSelect, charDomain) {
-  var resultChars = "";
-  for (j = 0; j < numCharsToSelect; j++) {
-    resultChars += charDomain.charAt(
-      Math.floor(Math.random() * charDomain.length)
-    );
-  }
-  return resultChars;
-}
-function randomlySelectLowercaseChars(numCharsToSelect) {
-  const allLowercaseChars = "abcdefghijklmnopqrstuvwxyz";
-  var resultLowerCaseChars;
-  for (i = 0; i < numCharsToSelect; i++) {
-    resultLowerCaseChars = allLowercaseChars.charAt(
-      Math.floor(Math.random() * numCharsToSelect)
-    );
-  }
-  return resultLowerCaseChars;
-}
-function randomlySelectUppercaseChars() {
-  const allUppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-}
-function randomlySelectUppercaseChars() {
-  const numericChars = "0123456789";
-}
-function randomlySelectSpecialChars() {
-  const numericChars = "!@#$%^&*";
-}
-
 function initiatePasswordLengthPrompt() {
   var rawPasswordLength = prompt(
     "What is the number of characters that your password should have?"
@@ -128,8 +95,8 @@ function initiatePasswordLengthPrompt() {
     humorousSoberUpAlert();
   }
 }
-function isPasswordLengthValid(pLength) {
-  return pLength >= 8 && pLength < 128;
+function isPasswordLengthValid(passLength) {
+  return passLength >= 8 && passLength < 128;
 }
 function humorousSoberUpAlert() {
   alert(
@@ -148,18 +115,33 @@ function initiateNumericCharacterConfirm() {
 function initiateSpecialCharacterConfirm() {
   return confirm("Does your password need special characters?");
 }
-
+function randomlySelectChars(numCharsToSelect, charDomain) {
+  var resultChars = "";
+  for (j = 0; j < numCharsToSelect; j++) {
+    resultChars += charDomain.charAt(
+      Math.floor(Math.random() * charDomain.length)
+    );
+  }
+  return resultChars;
+}
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  /* 
+  console.log("why you fire on load");
+  console.log(this);
   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-  */
+  if (password) {
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password;
+  }
 }
 // Add event listener to generate button
-//generateBtn.addEventListener("click", writePassword());
+generateBtn.addEventListener(
+  "click",
+  function () {
+    writePassword();
+  },
+  false
+);
