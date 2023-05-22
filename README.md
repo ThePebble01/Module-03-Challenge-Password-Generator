@@ -13,7 +13,7 @@ N/A
 ## Usage
 
 View the app!
-https://thepebble01.github.io/Module-03-Challenge-Password-Generator
+https://thepebble01.github.io/Password-Generator/
 
 Click "Generate Password" to initiate the prompts. A password will be generated that respects your choice for each. Please only respond to the character length prompt with an integer!
 
