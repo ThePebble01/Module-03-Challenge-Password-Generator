@@ -1,4 +1,24 @@
 // Assignment code here
+/*
+    USE THIS FOR REAL DEAL.....
+String.fromCharCode
+*/
+function handleWritePassword(event) {
+  event.preventDefault();
+  var password = generatePassword();
+  if (password) {
+    $("#password").val(password);
+  }
+}
+const charTypeOptions = [
+  new CharCodeRange(97, 122),
+  new CharCodeRange(65, 90),
+  new CharCodeRange(45, 57),
+  [
+    new CharCodeRange(32, 47), //add extra special chars....
+    new CharCodeRange(58, 64),
+  ],
+];
 function generatePassword() {
   var passwordResult = "";
   var passwordLength = initiatePasswordLengthPrompt();
@@ -10,21 +30,25 @@ function generatePassword() {
     2 = numeric
     3 = special
 
-    charTypeOptions - Strings representing the total possible characters for each type of character that the visitor can select.
+    charTypeOptions - Array of objects representing the starting and ending decimal of UTF-16 characters.
     charTypeSelections - Boolean array indicating which character types were selected from the confirm dialog boxes.
   */
     var charTypeSelections = [];
     charTypeSelections.push(
-      confirm("Does your password need lowercase characters?")
+      $("#use-lowercase")[0].checked
+      // confirm("Does your password need lowercase characters?")
     );
     charTypeSelections.push(
-      confirm("Does your password need uppercase characters?")
+      $("#use-uppercase")[0].checked
+      //confirm("Does your password need uppercase characters?")
     );
     charTypeSelections.push(
-      confirm("Does your password need numeric characters?")
+      $("#use-numbers")[0].checked
+      //confirm("Does your password need numeric characters?")
     );
     charTypeSelections.push(
-      confirm("Does your password need special characters?")
+      $("#use-special-chars")[0].checked
+      //confirm("Does your password need special characters?")
     );
     var totalSelections = charTypeSelections.filter(Boolean);
     if (totalSelections.length == 0) {
@@ -33,20 +57,20 @@ function generatePassword() {
       );
       return;
     }
-    const charTypeOptions = [
-      "abcdefghijklmnopqrstuvwxyz",
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-      "0123456789",
-      " !”#$%&’()*+,-./\\:;<=>?@[]^_`{|}~",
-    ];
     var tempPassword = "";
-    var numCharsToSelect = Math.ceil(passwordLength / totalSelections.length);
+    var numCharsToSelect = Math.ceil(passwordLength / totalSelections.length); //modify this instead of doing an even distro?
     for (i = 0; i < charTypeSelections.length; i++) {
       if (charTypeSelections[i]) {
-        tempPassword += randomlySelectChars(
-          numCharsToSelect,
-          charTypeOptions[i]
-        );
+        var charCodeRange = charTypeOptions[i];
+        if (Array.isArray(charCodeRange)) {
+          //split this further so that it grabs chars from both sets
+          var randIndex = Number.parseInt(Math.random() * charCodeRange.length);
+          console.log(randIndex);
+          charCodeRange = charCodeRange[randIndex];
+          console.log(charCodeRange);
+        }
+        tempPassword += randomlySelectChars(numCharsToSelect, charCodeRange);
+        console.log(tempPassword);
       }
     }
     var tempPasswordCharArray = tempPassword.split("");
@@ -69,12 +93,7 @@ function generatePassword() {
   }
 }
 function initiatePasswordLengthPrompt() {
-  var rawPasswordLength = prompt(
-    "What is the number of characters that your password should have?"
-  );
-  if (rawPasswordLength === null || rawPasswordLength === "") {
-    return; //Assume the user hit cancel...even if they hit ok without entering a value.
-  }
+  var rawPasswordLength = $("#password-length").val();
   var passwordLength = parseInt(rawPasswordLength);
   if (Number.isInteger(passwordLength)) {
     var maxAttempts = 5;
@@ -106,24 +125,20 @@ function humorousSoberUpAlert() {
     "Sober up, click 'Generate Password' again, and when prompted for the NUMBER of characters, THEN enter an integer (8, 9, 10...)"
   );
 }
-function randomlySelectChars(numCharsToSelect, charDomain) {
+function randomlySelectChars(numCharsToSelect, charCodeRange) {
   var resultChars = "";
   for (j = 0; j < numCharsToSelect; j++) {
-    resultChars += charDomain.charAt(
-      Math.floor(Math.random() * charDomain.length)
+    resultChars += String.fromCharCode(
+      Math.floor(
+        Math.random() * (charCodeRange.secondNum - charCodeRange.firstNum) +
+          charCodeRange.firstNum
+      )
     );
   }
   return resultChars;
 }
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  if (password) {
-    var passwordText = document.querySelector("#password");
-    passwordText.value = password;
-  }
+$("#generate").on("click", handleWritePassword);
+function CharCodeRange(firstNum, secondNum) {
+  this.firstNum = firstNum;
+  this.secondNum = secondNum;
 }
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);

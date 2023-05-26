@@ -41,7 +41,18 @@ header {
   max-width: 800px;
   padding: 30px 40px;
 }
-
+.char-options {
+  display: flex;
+  flex-direction: column;
+}
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 1%;
+}
+#password-length {
+  width: 30%;
+}
 .card-header::after {
   content: " ";
   display: block;

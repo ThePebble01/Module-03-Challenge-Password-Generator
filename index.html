@@ -16,6 +16,39 @@
         <div class="card-header">
           <h2>Generate a Password</h2>
         </div>
+        <form id="password-generator">
+          <div class="char-options">
+            <label for="password-length">Password Length:</label>
+            <input
+              id="password-length"
+              id="length"
+              type="number"
+              required="true"
+            />
+          </div>
+          <div class="char-options">
+            <div class="input-container">
+              <label for="use-lowercase">Use Lowercase Characters</label>
+              <input id="use-lowercase" type="checkbox" />
+            </div>
+
+            <div class="input-container">
+              <label for="use-uppercase">Use Uppercase Characters</label>
+              <input id="use-uppercase" type="checkbox" />
+            </div>
+            <div class="input-container">
+              <label for="use-numbers">Use Numbers</label>
+              <input id="use-numbers" type="checkbox" />
+            </div>
+            <div class="input-container">
+              <label for="use-special-chars">Use Special Characters</label>
+              <input id="use-special-chars" type="checkbox" />
+            </div>
+          </div>
+          <div class="card-footer">
+            <button id="generate" class="btn">Generate Password</button>
+          </div>
+        </form>
         <div class="card-body">
           <textarea
             readonly
@@ -24,11 +57,9 @@
             aria-label="Generated Password"
           ></textarea>
         </div>
-        <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
-        </div>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./assets/javascript/script.js"></script>
   </body>
 </html>
