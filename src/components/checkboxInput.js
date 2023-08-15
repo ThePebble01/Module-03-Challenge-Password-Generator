@@ -1,8 +1,8 @@
-export default function CheckboxInput({ label, handleOnChange }) {
+export default function CheckboxInput({ label, idVal, handleOnClick }) {
   return (
     <div className="input-container">
-      <label for="use-lowercase">{label}</label>
-      <input id="use-lowercase" type="checkbox" onClick={handleOnChange} />
+      <label for={idVal}>{label}</label>
+      <input id={idVal} type="checkbox" onClick={handleOnClick} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-export default function PasswordOutput() {
+export default function PasswordOutput({ password }) {
   return (
     <div className="card-body">
       <textarea
@@ -6,6 +6,7 @@ export default function PasswordOutput() {
         id="password"
         placeholder="Your Secure Password"
         aria-label="Generated Password"
+        value={password}
       ></textarea>
     </div>
   );
