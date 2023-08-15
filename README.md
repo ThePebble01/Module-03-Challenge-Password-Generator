@@ -6,10 +6,6 @@ This application generates a unique password with constraints provided by the vi
 
 ![Image of Password Generator With Readable Random String That Was Magically Generated When The Developer Was Testing](assets/images/password-generator-readme.png?raw=true)
 
-## Installation
-
-N/A
-
 ## Usage
 
 View the app!
@@ -21,3 +17,4 @@ Click "Generate Password" to initiate the prompts. A password will be generated 
 
 Inspiration for selecting random characters from a string: https://www.slingacademy.com/article/ways-to-generate-random-strings-in-javascript/
 Ad-hoc review of the distribution of elements based on this "shuffle" algorithm: https://bost.ocks.org/mike/shuffle/compare.html
+Decimal values for character codes: https://asecuritysite.com/coding/asc2
