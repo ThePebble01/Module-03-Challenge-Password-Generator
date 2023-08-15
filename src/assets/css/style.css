@@ -16,12 +16,6 @@ body {
   background-color: #f9fbfd;
 }
 
-.wrapper {
-  padding-top: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
 header {
   text-align: center;
   padding: 20px;
@@ -40,24 +34,24 @@ header {
   max-width: 800px;
   padding: 30px 40px;
 }
+
+.form-container {
+  align-items: center;
+}
+
 .char-options {
   display: flex;
   flex-direction: column;
 }
+
 .input-container {
   display: flex;
   justify-content: space-between;
   margin: 1%;
 }
+
 #password-length {
-  width: 30%;
-}
-.card-header::after {
-  content: " ";
-  display: block;
-  width: 100%;
-  background: #e7e9eb;
-  height: 2px;
+  width: 8%;
 }
 
 .card-body {
@@ -103,13 +97,11 @@ button[disabled] {
   background: #c0c7cf;
 }
 
-.float-right {
-  float: right;
-}
 .error {
   background-color: salmon;
   text-align: center;
 }
+
 #password {
   -webkit-appearance: none;
   -moz-appearance: none;

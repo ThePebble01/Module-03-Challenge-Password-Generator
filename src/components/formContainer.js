@@ -45,8 +45,8 @@ export default function FormContainer({ generatePassword }) {
   return (
     <div className="card">
       <form id="password-generator" onSubmit={handleOnSubmit}>
-        <div className="char-options">
-          <label for="password-length">"Password Length"</label>
+        <div className="input-container">
+          <label for="password-length">Password Length</label>
           <input
             defaultValue={8}
             id="password-length"
@@ -56,6 +56,8 @@ export default function FormContainer({ generatePassword }) {
             onBlur={handleOnBlur}
           />
           {lengthError ? <FormError errorMessage={lengthError} /> : <></>}
+        </div>
+        <div className="char-options">
           <CheckboxInput
             label="Use Lowercase Characters"
             idVal="lower"

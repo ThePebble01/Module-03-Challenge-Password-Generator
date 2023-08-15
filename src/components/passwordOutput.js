@@ -5,7 +5,6 @@ export default function PasswordOutput({ password }) {
         readOnly
         id="password"
         placeholder="Your Secure Password"
-        aria-label="Generated Password"
         value={password}
       ></textarea>
     </div>
