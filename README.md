@@ -4,7 +4,7 @@
 
 This application generates a unique password with constraints provided by the visitor through prompts.
 
-![Image of Password Generator With Readable Random String That Was Magically Generated When The Developer Was Testing](assets/images/password-generator-readme.png?raw=true)
+![Image of Password Generator With Readable Random String That Was Magically Generated When The Developer Was Testing](src/assets/images/password-generator-readme.png?raw=true)
 
 ## Usage
 
